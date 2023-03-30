@@ -69,13 +69,15 @@ export const Login = () => {
       /*
        * =============================================
        * */
+      ReactSession.set("user_id", response.data.user_id);
       ReactSession.set("username", response.data.username);
       ReactSession.set("token", response.data.token);
 
       dispatch(
         setUser({
-          username: ReactSession.get("username"),
-          token: ReactSession.get("token"),
+          user_id: ReactSession.get("user_id") || undefined,
+          username: ReactSession.get("username") || undefined,
+          token: ReactSession.get("token") || undefined,
         })
       );
 
@@ -98,8 +100,8 @@ export const Login = () => {
    * ==========================================================================
    * */
 
-  return state.user?.username ? (
-    <Navigate to="/dashboard" />
+  return !!state.user.token && !!state.user.user_id && !!state.user.username ? (
+    <Navigate to="/admin/dashboard" />
   ) : (
     <Flex
       h="100vh"

@@ -4,16 +4,18 @@ import { ReactSession } from "react-client-session";
 ReactSession.setStoreType("localStorage");
 
 interface User {
-  user?: {
-    username?: string;
-    token?: string;
+  user: {
+    user_id: number | undefined;
+    username: string | undefined;
+    token: string | undefined;
   };
 }
 
 const initialState: User = {
   user: {
-    username: ReactSession.get("username"),
-    token: ReactSession.get("token"),
+    user_id: ReactSession.get("user_id") || undefined,
+    username: ReactSession.get("username") || undefined,
+    token: ReactSession.get("token") || undefined,
   },
 };
 
@@ -24,12 +26,14 @@ const UserSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
-    logoutUser: (state ) => {
+    logoutUser: (state) => {
+      ReactSession.remove("user_id");
       ReactSession.remove("username");
       ReactSession.remove("token");
       state.user = {
-        username: ReactSession.get("username"),
-        token: ReactSession.get("token"),
+        user_id: ReactSession.get("user_id") || undefined,
+        username: ReactSession.get("username") || undefined,
+        token: ReactSession.get("token") || undefined,
       };
     },
   },

@@ -47,7 +47,7 @@ interface Props {
  * conso
  * */
 export const SideBar = ({ isHidden, setIsHiden }: Props) => {
-  const { collapsed, collapseSidebar } = useProSidebar();
+  const { collapsed } = useProSidebar();
 
   const sidebarBackground = useColorModeValue("#F1F5F9", "#394353");
   const itemHover = useColorModeValue("teal", "#495260");
@@ -60,7 +60,13 @@ export const SideBar = ({ isHidden, setIsHiden }: Props) => {
       defaultCollapsed={collapsed}
       hidden={isHidden}
       backgroundColor={sidebarBackground}
-      style={{ border: "none", position: "fixed", height: "100%", zIndex: 2 }}
+      style={{
+        border: "none",
+        position: "fixed",
+        height: "100%",
+        zIndex: 2,
+        transition: "1s all ease",
+      }}
     >
       <Menu
         menuItemStyles={{
@@ -145,7 +151,7 @@ export const SideBar = ({ isHidden, setIsHiden }: Props) => {
         </SubMenu>
 
         <MenuItem
-          component={<Link to={"/admin/usuarios"} />}
+          component={<Link to={"/admin/users"} />}
           icon={<MdPerson size={collapsed ? 30 : 25} />}
         >
           Usuarios

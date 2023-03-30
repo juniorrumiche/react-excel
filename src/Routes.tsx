@@ -18,11 +18,7 @@ export const Routes = createBrowserRouter([
    * */
   {
     path: "/",
-    element: (
-      <ProtectedRoutes>
-        <Main />
-      </ProtectedRoutes>
-    ),
+    element: <div>esto es el index</div>,
   },
 
   /*
@@ -76,6 +72,20 @@ export const Routes = createBrowserRouter([
     element: (
       <ProtectedRoutes>
         <RegionDataPage />
+      </ProtectedRoutes>
+    ),
+  },
+
+  /*
+   * ==========================================================================
+   * conso
+   * */
+
+  {
+    path: "/admin/users",
+    element: (
+      <ProtectedRoutes>
+        <Main>cuenta de usuarios</Main>
       </ProtectedRoutes>
     ),
   },

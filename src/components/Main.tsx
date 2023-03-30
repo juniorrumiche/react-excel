@@ -10,8 +10,10 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Text,
   useColorMode,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 /*
@@ -35,6 +37,7 @@ import { LogoutModal } from "./LogoutModal";
  * ==========================================================================
  * */
 import { SideBar } from "./SideBar";
+import { UserConfig } from "./userEdit";
 
 /*
  * ==========================================================================
@@ -50,8 +53,9 @@ interface Props {
 export const Main = ({ children }: Props) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [isHidden, setIshHidden] = useState(true);
-  
+
   const state = useSelector((state: RootState) => state.UserSlice);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const barBackground = useColorModeValue("whiteAlpha.400", "whiteAlpha.100");
   // const background = useColorModeValue("#EDF2F7", "#2D3748");
@@ -108,15 +112,16 @@ export const Main = ({ children }: Props) => {
                 </Center>
                 <br />
                 <Center>
-                  <p>{state.user?.username}</p>
+                  <Text fontWeight="bold">{state.user?.username}</Text>
                 </Center>
                 <br />
-                <MenuItem>Your Servers</MenuItem>
-                <MenuItem>Account Settings</MenuItem>
+                <MenuItem></MenuItem>
+                <MenuItem onClick={onOpen}> Configuracion Usuario</MenuItem>
               </MenuList>
             </Menu>
           </HStack>
         </Flex>
+        <UserConfig onClose={onClose} onOpen={onOpen} isOpen={isOpen} />
         <Box boxSizing="border-box" p={5}>
           {children}
         </Box>

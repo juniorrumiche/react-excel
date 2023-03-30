@@ -23,6 +23,10 @@ interface dataChart {
     value: number;
     name: string;
   }[];
+  data_cacs?: {
+    value: number;
+    name: string;
+  }[];
 }
 
 /*
@@ -73,6 +77,11 @@ export const Dashboard = () => {
 
   const options = {
     backgroundColor: chartBackground,
+    toolbox: {
+      feature: {
+        saveAsImage: { show: true },
+      },
+    },
     tooltip: {
       trigger: "item",
     },
@@ -99,6 +108,13 @@ export const Dashboard = () => {
       trigger: "axis",
       axisPointer: {
         type: "shadow",
+      },
+    },
+    toolbox: {
+      show: true,
+      feature: {
+        magicType: { show: true, type: ["line", "bar"] },
+        saveAsImage: { show: true },
       },
     },
     grid: {
@@ -131,6 +147,44 @@ export const Dashboard = () => {
     ],
   };
 
+  const options3 = {
+    backgroundColor: chartBackground,
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      top: "5%",
+      left: "center",
+    },
+    series: [
+      {
+        name: "Nombre Centro",
+        type: "pie",
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        label: {
+          show: false,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 30,
+            fontWeight: "bold",
+          },
+        },
+        labelLine: {
+          show: false,
+        },
+        data: data?.data_cacs || [],
+      },
+    ],
+  };
   /*
    * ==========================================================================
    * */
@@ -199,7 +253,24 @@ export const Dashboard = () => {
             theme={colorMode === "dark" ? "dark" : "light"}
             option={options2}
             style={{ width: "100%", height: "400px" }}
-          ></ReactEcharts>
+          />
+        </Box>
+      </HStack>
+
+      <HStack spacing={0} justifyContent="space-between" wrap="wrap">
+        <Box
+          boxShadow="lg"
+          mt={5}
+          p={3}
+          width={["100%", "100%", "49%", "49%"]}
+          background="whiteAlpha.100"
+          borderRadius="lg"
+        >
+          <ReactEcharts
+            theme={colorMode === "dark" ? "dark" : "light"}
+            option={options3}
+            style={{ width: "100%", height: "400px" }}
+          />
         </Box>
       </HStack>
     </Main>
