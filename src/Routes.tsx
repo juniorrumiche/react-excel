@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { Main } from "./components/Main";
 import { NotFoundPage } from "./pages/404";
 import { Dashboard } from "./pages/DashBoard";
+import { ErrorBoundary } from "./pages/ErrorBoundary";
 import { Login } from "./pages/Login";
 import { ProtectedRoutes } from "./pages/ProtectedRoutes";
 import { RegionDataPage } from "./pages/RegionDataPage";
@@ -33,6 +34,7 @@ export const Routes = createBrowserRouter([
         <Dashboard />
       </ProtectedRoutes>
     ),
+    errorElement: <ErrorBoundary />,
   },
   /*
    * ==========================================================================
@@ -55,6 +57,8 @@ export const Routes = createBrowserRouter([
         <Upload />
       </ProtectedRoutes>
     ),
+
+    errorElement: <ErrorBoundary />,
   },
 
   /*
@@ -74,6 +78,8 @@ export const Routes = createBrowserRouter([
         <RegionDataPage />
       </ProtectedRoutes>
     ),
+
+    errorElement: <ErrorBoundary />,
   },
 
   /*
@@ -88,6 +94,8 @@ export const Routes = createBrowserRouter([
         <Main>cuenta de usuarios</Main>
       </ProtectedRoutes>
     ),
+
+    errorElement: <ErrorBoundary />,
   },
 
   /*
